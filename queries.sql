@@ -124,3 +124,14 @@ ON animals.id = visits.animal_id
 JOIN vets 
 ON vets.id = visits.vet_id
 WHERE animals.species_id NOT IN (SELECT species_id FROM specializations WHERE vet_id = vets.id);
+
+-- What specialty should Maisy Smith consider getting? Look for the species she gets the most.
+SELECT species.name as speciality, count(*) FROM visits
+JOIN animals 
+ON animals.id = visits.animal_id
+JOIN species 
+ON animals.species_id = species.id
+JOIN vets 
+ON vets.id = visits.vet_id
+WHERE vets.name = 'Maisy Smith'
+GROUP BY species.name;
