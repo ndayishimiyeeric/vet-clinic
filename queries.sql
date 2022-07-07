@@ -55,3 +55,14 @@ SELECT animals.name FROM animals JOIN owners ON animals.owner_id = owners.id WHE
 SELECT animals.name FROM animals JOIN owners ON animals.owner_id = owners.id WHERE owners.full_name = 'Dean Winchester' AND animals.escape_attempts = 0;
 
 SELECT owners.full_name, COUNT(animals.name) FROM owners LEFT JOIN animals ON animals.owner_id = owners.id GROUP BY owners.full_name ORDER BY COUNT(animals.name) DESC;
+
+-- Who was the last animal seen by William Tatcher?
+SELECT animals.name, visits.date_of_visit FROM visits
+JOIN animals 
+ON animals.id = visits.animal_id
+JOIN vets 
+ON vets.id = visits.vet_id
+WHERE vets.name = 'William Tatcher'
+ORDER BY visits.date_of_visit DESC
+LIMIT 1;
+
