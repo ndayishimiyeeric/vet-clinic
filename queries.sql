@@ -80,3 +80,13 @@ JOIN specializations
 ON vets.id = specializations.vet_id OR vets.id != specializations.vet_id
 JOIN species 
 ON specializations.species_id = species.id;
+
+-- List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
+SELECT animals.name, visits.date_of_visit FROM visits
+JOIN animals 
+ON animals.id = visits.animal_id
+JOIN vets 
+ON vets.id = visits.vet_id
+WHERE vets.name = 'Stephanie Mendez' 
+AND date_of_visit > '2020-04-01' 
+AND date_of_visit < '2020-08-30';
