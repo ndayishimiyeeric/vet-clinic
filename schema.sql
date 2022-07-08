@@ -40,3 +40,39 @@ ALTER TABLE animals
 ADD CONSTRAINT owners_key
 FOREIGN KEY (owner_id)
 REFERENCES owners(id);
+
+CREATE TABLE vets(
+id INT GENERATED ALWAYS AS IDENTITY,
+name varchar(200),
+age INT,
+date_of_graduation DATE,
+PRIMARY KEY(id));
+
+CREATE TABLE specializations(
+species_id INT,
+vet_id INT);
+
+ALTER TABLE specializations
+ADD CONSTRAINT species_key
+FOREIGN KEY (species_id)
+REFERENCES species(id);
+
+ALTER TABLE specializations
+ADD CONSTRAINT vet_key
+FOREIGN KEY (vet_id)
+REFERENCES vets(id);
+
+CREATE TABLE visits(
+animal_id INT,
+vet_id INT,
+date_of_visit DATE);
+
+ALTER TABLE visits
+ADD CONSTRAINT animal_key
+FOREIGN KEY (animal_id)
+REFERENCES animals(id);
+
+ALTER TABLE visits
+ADD CONSTRAINT vet_key
+FOREIGN KEY (vet_id)
+REFERENCES vets(id);
